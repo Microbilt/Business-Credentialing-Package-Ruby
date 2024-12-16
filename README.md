@@ -1,17 +1,25 @@
-# Locate Assets Package Client
+# Business Credentialing Package Client
 
-A Ruby client for consuming the Microbilt Property Search API.
+A Ruby client for consuming the Microbilt Business Credentialing API.
 
 API page - https://developer.microbilt.com/api/PropertySearch
 
+or more about APIs You can see on [Microbilt Developer Portal](https://developer.microbilt.com/)
+
+## APIs in this plan:
+
+[ProfessionalLicenseSearch](https://developer.microbilt.com/api/ProfessionalLicenseSearch)
+
+[UCCSearchReport](https://developer.microbilt.com/api/UCCSearchReport)
+
 # Installation
 
-`composer require Microbilt/Locate-Assets-Package-Ruby`
+`composer require Microbilt/Business-Credentialing-Package-Ruby`
 
 # Quick Start
 
 ```
-locate_assets_package_client = LocateAssetsPackage::LocateAssetsPackageClient.new("You_client_id", "You_client_secret")
+business_credentialing_package_client = BusinessCredentialingPackage::BusinessCredentialingPackageClient.new("You_client_id", "You_client_secret")
 ```
 # Configuration
 
@@ -22,23 +30,21 @@ locate_assets_package_client = LocateAssetsPackage::LocateAssetsPackageClient.ne
 `EnvironmentType` optional (defaults to Production). Other option is Sandbox. 
 
 # Usage
-See https://developer.microbilt.com/api/PropertySearch for the necessary parameters to pass in to each function.
+See https://developer.microbilt.com/api/ProfessionalLicenseSearch for the necessary parameters to pass in to each function.
 For report created request model 
 ```
-owner_info = OwnerInfo.new(
-  PersonName.new(
-    "LORENZO A",
-    "FOSTER"
-  )
+person_name = PersonName.new(
+  first_name: "John",
+  last_name: "Green"
 )
-
-post_addr = PostAddr.new(
-  "530 EAKER WAY",
-  "ANTIOCH",
-  "CA",
-  "94509"
-)
-
-property_search_request_model = PropertySearchRequestModel.new(owner_info, post_addr).to_h.to_json
+professional_license_search_request = ProfessionalLicenseSearchRequestModel.new(person_name: person_name, state_prov: "TX").to_h.to_json
 ```
-All responses for all requests 'JsonObject', for get JSON string You can use ```.ToString()``` method
+See https://developer.microbilt.com/api/UCCSearchReport for the necessary parameters to pass in to each function.
+For report created request model 
+```
+post_addr = {addr1: "1900 US HWY 69", city: "EXCELSIOR SPRINGS", state_prov: "MO", postal_code: "64024", country: "USA"}
+contact_info = [{ postAddr: post_addr }]
+org_info = OrgInfo.new(name: "69 AUTO SALES LLC", contact_info: contact_info)
+
+ucc_search_report_request = UCCSearchReportRequestModel.new(org_info: org_info).to_h.to_json
+```

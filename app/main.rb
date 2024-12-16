@@ -33,7 +33,6 @@ puts "Test UCCSearchReport:"
 puts "Test GetReport:"
 
 post_addr = {addr1: "1900 US HWY 69", city: "EXCELSIOR SPRINGS", state_prov: "MO", postal_code: "64024", country: "USA"}
-#contact_info = ContactInfo.new(post_addr: post_addr)
 contact_info = [{ postAddr: post_addr }]
 org_info = OrgInfo.new(name: "69 AUTO SALES LLC", contact_info: contact_info)
 
